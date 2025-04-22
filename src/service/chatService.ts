@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://dvbc8l62-8000.use.devtunnels.ms";
 
 export async function uploadPDF(file: File) {
     console.log("Uploading PDF to API:", file.name);
