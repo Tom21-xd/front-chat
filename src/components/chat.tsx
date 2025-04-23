@@ -29,8 +29,9 @@ export default function Chat() {
       await uploadPDF(selected);
       setFile(selected);
       setMessages([]);
-    } catch (err: unknown) {
-    }
+    } catch {
+      console.error("Error al subir el PDF.");
+    }    
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,8 +47,9 @@ export default function Chat() {
       const response = await askQuestion(input);
       const aiMessage = { role: 'ai' as const, content: response };
       setMessages(prev => [...prev, aiMessage]);
-    } catch (err: unknown) {
-    } finally {
+    } catch {
+      console.error("Error al enviar la pregunta.");
+    }finally {
       setLoading(false);
     }
   };
