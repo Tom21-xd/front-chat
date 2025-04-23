@@ -3,7 +3,9 @@ import { useState, useRef, useEffect } from 'react';
 export function useRecorder() {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recorderRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [RecordRTC, setRecordRTC] = useState<any>(null);
 
   useEffect(() => {
