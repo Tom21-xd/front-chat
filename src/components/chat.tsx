@@ -29,8 +29,7 @@ export default function Chat() {
       await uploadPDF(selected);
       setFile(selected);
       setMessages([]);
-    } catch (err: any) {
-      alert(err.message);
+    } catch (err: unknown) {
     }
   };
 
@@ -47,8 +46,7 @@ export default function Chat() {
       const response = await askQuestion(input);
       const aiMessage = { role: 'ai' as const, content: response };
       setMessages(prev => [...prev, aiMessage]);
-    } catch (err: any) {
-      alert(err.message);
+    } catch (err: unknown) {
     } finally {
       setLoading(false);
     }
