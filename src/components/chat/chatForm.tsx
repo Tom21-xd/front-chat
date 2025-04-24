@@ -66,9 +66,14 @@ export default function ChatForm({
           disabled={loading}
           onClick={() => {
             if (!isMobile && !loading) {
-              isRecording ? stopRecording() : startRecording();
+              if (isRecording) {
+                stopRecording();
+              } else {
+                startRecording();
+              }
             }
           }}
+          
           onMouseDown={() => {
             if (isMobile && !loading) startRecording();
           }}
