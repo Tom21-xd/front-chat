@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 export function useRecorder() {
   const [isRecording, setIsRecording] = useState(false);
@@ -9,7 +9,7 @@ export function useRecorder() {
   const [RecordRTC, setRecordRTC] = useState<any>(null);
 
   useEffect(() => {
-    import('recordrtc').then((mod) => setRecordRTC(() => mod.default));
+    import("recordrtc").then((mod) => setRecordRTC(() => mod.default));
   }, []);
 
   const start = async () => {
@@ -18,8 +18,8 @@ export function useRecorder() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const recorder = new RecordRTC(stream, {
-        type: 'audio',
-        mimeType: 'audio/wav',
+        type: "audio",
+        mimeType: "audio/wav",
         recorderType: RecordRTC.StereoAudioRecorder,
         desiredSampRate: 16000,
       });
