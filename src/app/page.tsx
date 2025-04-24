@@ -50,7 +50,7 @@ export default function HomePage() {
 
       <section className="flex-1">
         {chat ? (
-          <ChatContainer chatId={chat.id} chatTitle={chat.title} />
+          <ChatContainer chatTitle={chat.title} />
         ) : (
           <div className="min-h-screen flex items-center justify-center bg-white text-gray-500">
             Selecciona un chat para comenzar
