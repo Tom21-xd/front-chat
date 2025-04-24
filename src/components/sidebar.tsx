@@ -68,7 +68,7 @@ export default function Sidebar({
           <>
             <div onClick={handleLogoClick} className="cursor-pointer">
               <Image
-                src="/logo-transparent-small.png"
+                src="/logo-transparent-small.webp"
                 alt="Logo ChatJMS"
                 width={120}
                 height={40}

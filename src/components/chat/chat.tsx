@@ -26,7 +26,6 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [pendingAudioText, setPendingAudioText] = useState<string | null>(null);
-  
 
   const { start, stop, isRecording, audioBlob } = useRecorder();
 
@@ -53,7 +52,6 @@ export default function Chat() {
     e.preventDefault();
     if (!input.trim()) return;
 
-  
     const userMessage = { role: "user" as const, content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
@@ -91,15 +89,20 @@ export default function Chat() {
       setLoading(true);
 
       askFromAudio(audioFile)
-        .then((response) => {
-          const aiMessage = { role: "ai" as const, content: response };
+        .then(async (response) => {
+          console.log("respuesta audio", response);
+          const botAudio = await speakText(response);
+          const aiMessage = {
+            role: "ai" as const,
+            content: response,
+            audioBlob: botAudio,
+          };
           setMessages((prev) => [...prev, aiMessage]);
         })
         .catch((err) => {
           console.error("Error al procesar el audio:", err);
           alert(err.message);
         })
-
         .finally(() => setLoading(false));
     }
   }, [audioBlob]);
