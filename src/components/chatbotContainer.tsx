@@ -1,10 +1,8 @@
 import Chat from "./chat/chat";
 
 export default function ChatContainer({
-  chatId,
   chatTitle,
 }: {
-  chatId: string;
   chatTitle: string;
 }) {
   return (

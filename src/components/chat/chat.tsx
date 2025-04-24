@@ -26,8 +26,7 @@ export default function Chat() {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [pendingAudioText, setPendingAudioText] = useState<string | null>(null);
-  const [abortController, setAbortController] =
-    useState<AbortController | null>(null);
+  
 
   const { start, stop, isRecording, audioBlob } = useRecorder();
 
@@ -54,11 +53,7 @@ export default function Chat() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    abortController?.abort();
-
-    const controller = new AbortController();
-    setAbortController(controller);
-
+  
     const userMessage = { role: "user" as const, content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
@@ -163,7 +158,6 @@ export default function Chat() {
               onSubmit={handleSubmit}
               startRecording={start}
               stopRecording={stop}
-              abortController={abortController}
             />
           </div>
         </>

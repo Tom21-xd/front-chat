@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FormEvent } from "react";
-import { Mic, Send, Square } from "lucide-react";
+import { Mic, Send } from "lucide-react";
 
 interface ChatFormProps {
   input: string;
@@ -12,7 +12,6 @@ interface ChatFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   startRecording: () => void;
   stopRecording: () => void;
-  abortController?: AbortController | null;
 }
 
 export default function ChatForm({
@@ -23,7 +22,6 @@ export default function ChatForm({
   onSubmit,
   startRecording,
   stopRecording,
-  abortController,
 }: ChatFormProps) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -71,10 +69,21 @@ export default function ChatForm({
               isRecording ? stopRecording() : startRecording();
             }
           }}
-          onMouseDown={isMobile && !loading ? startRecording : undefined}
-          onMouseUp={isMobile && !loading ? stopRecording : undefined}
-          onTouchStart={isMobile && !loading ? startRecording : undefined}
-          onTouchEnd={isMobile && !loading ? stopRecording : undefined}
+          onMouseDown={() => {
+            if (isMobile && !loading) startRecording();
+          }}
+          onMouseUp={() => {
+            if (isMobile && !loading) stopRecording();
+          }}
+          
+          onTouchStart={() => {
+            if (isMobile && !loading) startRecording();
+          }}
+          
+          onTouchEnd={() => {
+            if (isMobile && !loading) stopRecording();
+          }}
+          
           className={`w-11 h-11 flex items-center justify-center rounded-full transition ${
             loading
               ? "bg-gray-300 cursor-not-allowed"
